@@ -1,18 +1,23 @@
 export default function Avatar3D() {
   return (
-    <div className="relative w-full h-full flex items-center justify-center py-4">
-      {/* Photo — circular, sem borda, sem glow */}
+    <>
       <img
-        src="/avatar.jpg"
+        src="/download.png"
         alt="Mikael Dias"
-        className="w-44 h-44 rounded-full object-cover object-top"
+        className="absolute inset-0 w-full h-full object-cover object-top"
       />
 
+      {/* Handle overlay */}
+      <div className="absolute top-3 left-3 flex items-center gap-1.5 text-[11px] text-white/70 uppercase tracking-wider">
+        <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
+        @mikaelfiles
+      </div>
+
       {/* Badge disponível */}
-      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-[#0f172a] border border-blue-500/30 rounded-full px-3 py-1.5 text-xs text-blue-400 font-mono whitespace-nowrap">
+      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-black/60 backdrop-blur-sm border border-blue-500/30 rounded-full px-3 py-1.5 text-xs text-blue-400 font-mono whitespace-nowrap">
         <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
         Disponível para projetos
       </div>
-    </div>
+    </>
   )
 }

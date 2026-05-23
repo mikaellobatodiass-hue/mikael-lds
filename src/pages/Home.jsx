@@ -91,23 +91,9 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1 }}
-              className={`rounded-2xl p-5 border relative overflow-hidden flex flex-col ${isDark ? 'bg-[#111] border-white/8' : 'bg-white border-gray-200 shadow-sm'}`}
+              className="rounded-2xl relative overflow-hidden min-h-[380px]"
             >
-              {/* Card header */}
-              <div className="flex items-center justify-between mb-1">
-                <div className="text-[11px] text-gray-500 uppercase tracking-wider flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
-                  @MIKAELFILES
-                </div>
-              </div>
-              <div className={`text-xs mb-3 ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>
-                Uberlândia, MG · Brasil
-              </div>
-
-              {/* Avatar centered */}
-              <div className="flex-1 flex items-center justify-center min-h-[300px]">
-                <Avatar3D />
-              </div>
+              <Avatar3D />
             </motion.div>
 
             {/* Col 3 — Sidebar: Stack + GitHub + Background */}
