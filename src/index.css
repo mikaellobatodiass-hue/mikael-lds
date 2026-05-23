@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-[#0a0a0a] text-white font-sans antialiased;
+    overflow-x: hidden;
+  }
+
+  .dark body {
+    @apply bg-[#0a0a0a] text-white;
+  }
+
+  .light body {
+    @apply bg-gray-50 text-gray-900;
+  }
+}
+
+@layer components {
+  .hex-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50V16L28 0l28 16v34L28 66zm0-2l26-15V18L28 2 2 18v31l26 15z' fill='%23ffffff' fill-opacity='0.03'/%3E%3C/svg%3E");
+  }
+
+  .hex-pattern-light {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50V16L28 0l28 16v34L28 66zm0-2l26-15V18L28 2 2 18v31l26 15z' fill='%23000000' fill-opacity='0.05'/%3E%3C/svg%3E");
+  }
+
+  .gradient-text {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(to right, #3b82f6, #06b6d4);
+  }
+
+  .card-dark {
+    @apply bg-[#111111] border border-white/5 rounded-xl;
+  }
+
+  .card-light {
+    @apply bg-white border border-gray-200 rounded-xl;
+  }
+
+  .btn-primary {
+    @apply bg-white text-black font-semibold px-6 py-3 rounded-lg hover:bg-gray-200 transition-all duration-200 flex items-center gap-2;
+  }
+
+  .btn-secondary {
+    @apply border border-white/20 text-white font-semibold px-6 py-3 rounded-lg hover:bg-white/5 transition-all duration-200 flex items-center gap-2;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .text-shadow {
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  }
+}
+
+/* Pulse ring animation */
+@keyframes pulse-ring {
+  0% { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+.pulse-ring::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #22c55e;
+  animation: pulse-ring 2s ease-out infinite;
+}
+
+/* Contribution graph bars */
+.contrib-bar {
+  transition: all 0.3s ease;
+}
+
+.contrib-bar:hover {
+  opacity: 0.8;
+  transform: scaleY(1.1);
+  transform-origin: bottom;
+}
