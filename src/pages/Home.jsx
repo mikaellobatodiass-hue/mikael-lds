@@ -6,18 +6,14 @@ import Avatar3D from '../components/Avatar3D'
 import ContribGraph from '../components/ContribGraph'
 import TechScroll from '../components/TechScroll'
 
-const stack = [
-  { name: 'Python', color: '#3776AB', icon: '🐍' },
-  { name: 'React', color: '#61DAFB', icon: '⚛' },
-  { name: 'Node.js', color: '#339933', icon: '🟢' },
-  { name: 'PostgreSQL', color: '#4169E1', icon: '🐘' },
-]
+const BASE = 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons'
 
-const floatingCard = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6 },
-}
+const stack = [
+  { name: 'TypeScript', icon: `${BASE}/typescript/typescript-original.svg` },
+  { name: 'Tailwind',   icon: `${BASE}/tailwindcss/tailwindcss-original.svg` },
+  { name: 'React',      icon: `${BASE}/react/react-original.svg` },
+  { name: 'Docker',     icon: `${BASE}/docker/docker-original.svg` },
+]
 
 export default function Home() {
   const { isDark } = useTheme()
@@ -32,119 +28,144 @@ export default function Home() {
         <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-blue-600/5 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute top-1/4 right-1/4 w-72 h-72 bg-cyan-600/5 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-12 items-center py-20">
-          {/* Left: text */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7 }}
-          >
-            {/* Available badge */}
-            <div className="flex items-center gap-2 mb-6">
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500" />
-              </span>
-              <span className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                disponível para oportunidades
-              </span>
-            </div>
+        {/* ── 3-column grid: text | avatar card | sidebar cards ── */}
+        <div className="max-w-7xl mx-auto px-6 w-full py-20">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_260px_148px] gap-6 items-start">
 
-            <h1 className={`text-5xl sm:text-6xl font-black leading-[1.05] mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-              Soluções em
-              <br />
-              <span className="gradient-text">Python & React,</span>
-              <br />
-              <span className={`font-light ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
-                Dados ao Deploy.
-              </span>
-            </h1>
-
-            <p className={`text-base leading-relaxed max-w-md mb-8 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-              Transformo requisitos em software de alto desempenho. Desenvolvedor especializado em
-              automação, análise de dados e aplicações web modernas.
-            </p>
-
-            <div className="flex flex-wrap gap-3">
-              <a
-                href="https://github.com/mikaellobatodiass-hue"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary"
-              >
-                <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
-                  <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z" />
-                </svg>
-                Ver Projetos no GitHub
-              </a>
-              <Link to="/contato" className="btn-secondary">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
-                  <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
-                </svg>
-                Entre em Contato
-              </Link>
-            </div>
-          </motion.div>
-
-          {/* Right: Avatar card + sidebar cards */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.15 }}
-            className="flex gap-4"
-          >
-            {/* Main avatar card */}
-            <div className={`flex-1 rounded-2xl p-6 border relative overflow-hidden min-h-[380px] ${isDark ? 'bg-[#111] border-white/8' : 'bg-white border-gray-200 shadow-sm'}`}>
-              <div className="text-xs text-gray-500 mb-4 uppercase tracking-wider flex items-center gap-2">
-                <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
-                @MIKAELFILES
+            {/* Col 1 — text */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7 }}
+              className="flex flex-col justify-center min-h-[420px]"
+            >
+              {/* Available badge */}
+              <div className="flex items-center gap-2 mb-6">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500" />
+                </span>
+                <span className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                  disponível para oportunidades
+                </span>
               </div>
-              <div className={`text-sm mb-1 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Uberlândia, MG · Brasil</div>
 
-              <Avatar3D />
-            </div>
+              <h1 className={`text-5xl xl:text-6xl font-black leading-[1.05] mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                Soluções em
+                <br />
+                <span className="gradient-text">Python & React,</span>
+                <br />
+                <span className={`font-light ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
+                  Dados ao Deploy.
+                </span>
+              </h1>
 
-            {/* Sidebar cards */}
-            <div className="flex flex-col gap-4 w-36">
+              <p className={`text-base leading-relaxed max-w-sm mb-8 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                Transformo requisitos em software de alto desempenho. Desenvolvedor especializado em
+                automação, análise de dados e aplicações web modernas.
+              </p>
+
+              <div className="flex flex-wrap gap-3">
+                <a
+                  href="https://github.com/mikaellobatodiass-hue"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary text-sm"
+                >
+                  <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+                    <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z" />
+                  </svg>
+                  Ver Projetos no GitHub
+                </a>
+                <Link to="/contato" className="btn-secondary text-sm">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
+                    <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+                  </svg>
+                  Entre em Contato
+                </Link>
+              </div>
+            </motion.div>
+
+            {/* Col 2 — Avatar card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.1 }}
+              className={`rounded-2xl p-5 border relative overflow-hidden flex flex-col ${isDark ? 'bg-[#111] border-white/8' : 'bg-white border-gray-200 shadow-sm'}`}
+            >
+              {/* Card header */}
+              <div className="flex items-center justify-between mb-1">
+                <div className="text-[11px] text-gray-500 uppercase tracking-wider flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
+                  @MIKAELFILES
+                </div>
+              </div>
+              <div className={`text-xs mb-3 ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>
+                Uberlândia, MG · Brasil
+              </div>
+
+              {/* Avatar centered */}
+              <div className="flex-1 flex items-center justify-center min-h-[300px]">
+                <Avatar3D />
+              </div>
+            </motion.div>
+
+            {/* Col 3 — Sidebar: Stack + GitHub + Background */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="flex flex-col gap-3"
+            >
               {/* Stack card */}
-              <div className={`rounded-xl p-4 border ${isDark ? 'bg-[#111] border-white/8' : 'bg-white border-gray-200 shadow-sm'}`}>
-                <div className="text-xs text-gray-500 uppercase tracking-wider mb-3">Stack</div>
+              <div className={`rounded-xl p-3 border ${isDark ? 'bg-[#111] border-white/8' : 'bg-white border-gray-200 shadow-sm'}`}>
+                <div className="text-[10px] text-gray-500 uppercase tracking-wider mb-2.5">Stack</div>
                 <div className="grid grid-cols-2 gap-2">
                   {stack.map(tech => (
                     <div
                       key={tech.name}
-                      className={`rounded-lg p-2 flex flex-col items-center gap-1 ${isDark ? 'bg-white/5' : 'bg-gray-50'}`}
+                      className={`rounded-lg p-2 flex flex-col items-center gap-1.5 ${isDark ? 'bg-white/5' : 'bg-gray-50'}`}
                       title={tech.name}
                     >
-                      <span className="text-lg">{tech.icon}</span>
+                      <img
+                        src={tech.icon}
+                        alt={tech.name}
+                        className="w-6 h-6 object-contain"
+                        loading="lazy"
+                      />
                       <span className="text-[9px] text-gray-500 text-center leading-tight">{tech.name}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* GitHub contrib mini */}
-              <div className={`rounded-xl p-4 border flex-1 ${isDark ? 'bg-[#111] border-white/8' : 'bg-white border-gray-200 shadow-sm'}`}>
+              {/* GitHub contrib */}
+              <div className={`rounded-xl p-3 border ${isDark ? 'bg-[#111] border-white/8' : 'bg-white border-gray-200 shadow-sm'}`}>
                 <ContribGraph totalCommits={312} />
               </div>
 
               {/* Background card */}
-              <div className={`rounded-xl p-4 border ${isDark ? 'bg-[#111] border-white/8' : 'bg-white border-gray-200 shadow-sm'}`}>
-                <div className="text-xs text-gray-500 uppercase tracking-wider mb-3">Background</div>
-                <div className="flex flex-col gap-2">
+              <div className={`rounded-xl p-3 border ${isDark ? 'bg-[#111] border-white/8' : 'bg-white border-gray-200 shadow-sm'}`}>
+                <div className="text-[10px] text-gray-500 uppercase tracking-wider mb-2.5">Background</div>
+                <div className="flex flex-col gap-2.5">
                   {[
                     { label: 'Análise de Sistemas', time: 'ADS' },
-                    { label: 'Automação', time: 'NOW' },
+                    { label: 'Automação & Dados', time: 'NOW' },
                   ].map(item => (
-                    <div key={item.label} className="flex items-center justify-between">
-                      <span className={`text-[10px] leading-tight ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>{item.label}</span>
-                      <span className={`text-[10px] font-mono ${item.time === 'NOW' ? 'text-green-500' : 'text-gray-500'}`}>{item.time}</span>
+                    <div key={item.label} className="flex items-center justify-between gap-2">
+                      <span className={`text-[10px] leading-tight ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+                        {item.label}
+                      </span>
+                      <span className={`text-[10px] font-mono flex-shrink-0 ${item.time === 'NOW' ? 'text-green-500' : 'text-gray-500'}`}>
+                        {item.time}
+                      </span>
                     </div>
                   ))}
                 </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+
+          </div>
         </div>
       </section>
 
