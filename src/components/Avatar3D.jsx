@@ -25,7 +25,7 @@ export default function Avatar3D() {
             borderRadius: '16px',
             display: 'block',
             marginTop: '-420px',
-            marginLeft: '-30px',
+            marginLeft: '-60px',
             transition: 'filter 0.3s ease, transform 0.3s ease',
             filter: hovered
               ? 'brightness(1.08) drop-shadow(0 0 18px rgba(59,130,246,0.55))'
