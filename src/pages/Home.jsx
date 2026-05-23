@@ -9,10 +9,10 @@ import TechScroll from '../components/TechScroll'
 const BASE = 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons'
 
 const stack = [
-  { name: 'TypeScript', icon: `${BASE}/typescript/typescript-original.svg` },
-  { name: 'Tailwind',   icon: `${BASE}/tailwindcss/tailwindcss-original.svg` },
+  { name: 'Python',     icon: `${BASE}/python/python-original.svg` },
   { name: 'React',      icon: `${BASE}/react/react-original.svg` },
-  { name: 'Docker',     icon: `${BASE}/docker/docker-original.svg` },
+  { name: 'Node.js',    icon: `${BASE}/nodejs/nodejs-original.svg` },
+  { name: 'PostgreSQL', icon: `${BASE}/postgresql/postgresql-original.svg` },
 ]
 
 export default function Home() {
@@ -141,7 +141,7 @@ export default function Home() {
 
               {/* GitHub contrib */}
               <div className={`rounded-xl p-3 border ${isDark ? 'bg-[#111] border-white/8' : 'bg-white border-gray-200 shadow-sm'}`}>
-                <ContribGraph totalCommits={312} />
+                <ContribGraph totalCommits={312} weekCount={13} cellSize={7} gap={2} />
               </div>
 
               {/* Background card */}
