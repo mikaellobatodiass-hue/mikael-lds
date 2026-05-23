@@ -1,15 +1,38 @@
 export default function Avatar3D() {
   return (
-    <div className="relative w-full h-full flex items-center justify-center">
+    <div style={{ position: 'relative', width: '100%', height: '100%', padding: 0, margin: 0, background: 'none' }}>
       <img
         src="/mikael.png"
         alt="Mikael Dias"
-        className="w-full h-full rounded-full"
-        style={{ objectFit: 'cover', objectPosition: 'top center' }}
+        style={{
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          objectPosition: 'top',
+          borderRadius: '16px',
+          display: 'block',
+        }}
       />
 
-      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-[#0f172a] border border-blue-500/30 rounded-full px-3 py-1.5 text-xs text-blue-400 font-mono whitespace-nowrap">
-        <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
+      <div style={{
+        position: 'absolute',
+        bottom: '12px',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '6px',
+        background: 'rgba(15,23,42,0.85)',
+        backdropFilter: 'blur(8px)',
+        border: '1px solid rgba(59,130,246,0.3)',
+        borderRadius: '999px',
+        padding: '6px 14px',
+        fontSize: '11px',
+        color: '#60a5fa',
+        fontFamily: 'monospace',
+        whiteSpace: 'nowrap',
+      }}>
+        <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#4ade80', display: 'inline-block', animation: 'pulse 2s infinite' }} />
         Disponível para projetos
       </div>
     </div>
