@@ -2,7 +2,7 @@ export default function Avatar3D() {
   return (
     <div className="relative w-full h-full flex items-center justify-center">
       <img
-        src="/download.png"
+        src="/avatar.png"
         alt="Mikael Dias"
         className="w-full h-full rounded-full"
         style={{ objectFit: 'cover', objectPosition: 'top center' }}
