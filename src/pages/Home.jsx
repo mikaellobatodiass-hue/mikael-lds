@@ -91,7 +91,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1 }}
-              className="rounded-2xl flex items-center justify-center"
+              className={`rounded-2xl border relative overflow-hidden min-h-[380px] flex items-center justify-center ${isDark ? 'bg-[#111] border-white/8' : 'bg-white border-gray-200 shadow-sm'}`}
             >
               <Avatar3D />
             </motion.div>

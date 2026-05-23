@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { ThemeProvider } from './context/ThemeContext'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import LikeButton from './components/LikeButton'
 import Home from './pages/Home'
 import About from './pages/About'
 import Projects from './pages/Projects'
@@ -46,6 +47,7 @@ export default function App() {
           <AnimatedRoutes />
         </main>
         <Footer />
+        <LikeButton />
       </BrowserRouter>
     </ThemeProvider>
   )

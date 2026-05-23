@@ -270,7 +270,7 @@ export default function Contact() {
               Discord
             </a>
             <a
-              href="https://wa.me/5534999999999"
+              href="https://wa.me/5589981089633"
               target="_blank"
               rel="noopener noreferrer"
               className={`flex items-center justify-center gap-3 py-4 rounded-xl border font-semibold text-sm transition-all duration-200 ${
