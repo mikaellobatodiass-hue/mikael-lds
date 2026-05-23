@@ -14,18 +14,25 @@ const techs = [
   { name: 'Prisma',      icon: `${BASE}/prisma/prisma-original.svg`, invert: true },
 ]
 
-function TechPill({ name, icon, invert }) {
+function TechItem({ name, icon, invert, index }) {
+  const delay = (index % techs.length) * 0.3
+
   return (
-    <div className="flex flex-col items-center gap-2 px-5 py-3 rounded-xl bg-white/5 border border-white/8 whitespace-nowrap min-w-[72px] hover:bg-white/10 transition-colors duration-200">
+    <div
+      className="flex flex-col items-center gap-2 px-6 whitespace-nowrap"
+      style={{
+        animation: `techFloat 3s ease-in-out ${delay}s infinite`,
+      }}
+    >
       <img
         src={icon}
         alt={name}
-        width={28}
-        height={28}
-        className={`w-7 h-7 object-contain ${invert ? 'invert brightness-90' : ''}`}
+        width={32}
+        height={32}
+        className={`w-8 h-8 object-contain drop-shadow-sm ${invert ? 'invert brightness-90' : ''}`}
         loading="lazy"
       />
-      <span className="text-[11px] text-gray-400 font-medium">{name}</span>
+      <span className="text-[11px] text-gray-500 font-medium">{name}</span>
     </div>
   )
 }
@@ -34,18 +41,27 @@ export default function TechScroll() {
   const doubled = [...techs, ...techs]
 
   return (
-    <div className="relative overflow-hidden py-1">
-      <div
-        className="flex gap-3"
-        style={{ animation: 'scroll 35s linear infinite', width: 'max-content' }}
-      >
-        {doubled.map((t, i) => (
-          <TechPill key={i} name={t.name} icon={t.icon} invert={t.invert} />
-        ))}
-      </div>
+    <>
+      <style>{`
+        @keyframes techFloat {
+          0%, 100% { transform: translateY(0px); }
+          50%       { transform: translateY(-6px); }
+        }
+      `}</style>
 
-      <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-[#0d0d0d] to-transparent pointer-events-none z-10" />
-      <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-[#0d0d0d] to-transparent pointer-events-none z-10" />
-    </div>
+      <div className="relative overflow-hidden py-3">
+        <div
+          className="flex items-end"
+          style={{ animation: 'scroll 35s linear infinite', width: 'max-content' }}
+        >
+          {doubled.map((t, i) => (
+            <TechItem key={i} index={i} name={t.name} icon={t.icon} invert={t.invert} />
+          ))}
+        </div>
+
+        <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-[#0d0d0d] to-transparent pointer-events-none z-10" />
+        <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-[#0d0d0d] to-transparent pointer-events-none z-10" />
+      </div>
+    </>
   )
 }
