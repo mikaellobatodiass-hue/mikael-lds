@@ -1,23 +1,31 @@
 export default function Avatar3D() {
   return (
-    <>
-      <img
-        src="/download.png"
-        alt="Mikael Dias"
-        className="absolute inset-0 w-full h-full object-cover object-top"
-      />
+    <div className="flex flex-col items-center gap-4 p-5 w-full">
+      {/* Wrapper relativo para o overlay do handle */}
+      <div className="relative w-full">
+        <div className="absolute top-2 left-2 z-10 flex items-center gap-1.5 text-[11px] text-white/70 uppercase tracking-wider">
+          <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
+          @mikaelfiles
+        </div>
 
-      {/* Handle overlay */}
-      <div className="absolute top-3 left-3 flex items-center gap-1.5 text-[11px] text-white/70 uppercase tracking-wider">
-        <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
-        @mikaelfiles
+        <img
+          src="/download.png"
+          alt="Mikael Dias"
+          style={{
+            width: '100%',
+            height: 'auto',
+            objectFit: 'contain',
+            objectPosition: 'center',
+            display: 'block',
+          }}
+        />
       </div>
 
-      {/* Badge disponível */}
-      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-black/60 backdrop-blur-sm border border-blue-500/30 rounded-full px-3 py-1.5 text-xs text-blue-400 font-mono whitespace-nowrap">
+      {/* Badge abaixo da foto */}
+      <div className="flex items-center gap-1.5 bg-[#0f172a] border border-blue-500/30 rounded-full px-3 py-1.5 text-xs text-blue-400 font-mono whitespace-nowrap">
         <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
         Disponível para projetos
       </div>
-    </>
+    </div>
   )
 }
