@@ -21,9 +21,10 @@ export default function Avatar3D() {
             height: '900px',
             maxHeight: 'none',
             objectFit: 'cover',
-            objectPosition: 'top',
+            objectPosition: 'top center',
             borderRadius: '16px',
             display: 'block',
+            marginTop: '-50px',
             transition: 'filter 0.3s ease, transform 0.3s ease',
             filter: hovered
               ? 'brightness(1.08) drop-shadow(0 0 18px rgba(59,130,246,0.55))'
