@@ -39,15 +39,22 @@ export default function Home() {
               transition={{ duration: 0.7 }}
               className="flex flex-col justify-center min-h-[420px]"
             >
-              {/* Available badge */}
-              <div className="flex items-center gap-2 mb-6">
-                <span className="relative flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500" />
-                </span>
-                <span className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                  disponível para oportunidades
-                </span>
+              {/* Available badges */}
+              <div className="flex flex-wrap items-center gap-3 mb-6">
+                <div className="flex items-center gap-2">
+                  <span className="relative flex h-2.5 w-2.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500" />
+                  </span>
+                  <span className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                    disponível para oportunidades
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-1.5 bg-[#0f172a] border border-blue-500/30 rounded-full px-3 py-1 text-xs text-blue-400 font-mono whitespace-nowrap">
+                  <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
+                  Disponível para projetos
+                </div>
               </div>
 
               <h1 className={`text-5xl xl:text-6xl font-black leading-[1.05] mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
