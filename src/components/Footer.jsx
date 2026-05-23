@@ -60,7 +60,7 @@ export default function Footer() {
                 ),
               },
               {
-                href: 'https://wa.me/5534999999999',
+                href: 'https://wa.me/5589981089633',
                 label: 'WhatsApp',
                 icon: (
                   <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
@@ -75,9 +75,12 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.label}
-                className={`p-2 rounded-lg transition-colors ${isDark ? 'text-gray-500 hover:text-white hover:bg-white/5' : 'text-gray-400 hover:text-gray-900 hover:bg-gray-100'}`}
+                className={`flex items-center gap-2 px-2 py-2 rounded-lg transition-colors ${isDark ? 'text-gray-500 hover:text-white hover:bg-white/5' : 'text-gray-400 hover:text-gray-900 hover:bg-gray-100'}`}
               >
                 {social.icon}
+                {social.label === 'WhatsApp' && (
+                  <span className="text-xs font-medium">(89) 98108-9633</span>
+                )}
               </a>
             ))}
           </div>
