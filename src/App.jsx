@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, MotionConfig, motion } from 'framer-motion'
+import { DEFAULT_TRANSITION, EASE } from './lib/motion'
 import { ThemeProvider } from './context/ThemeContext'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
@@ -10,22 +11,23 @@ import Projects from './pages/Projects'
 import Contact from './pages/Contact'
 
 const pageVariants = {
-  initial: { opacity: 0, y: 12 },
+  initial: { opacity: 0, y: 16 },
   animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -12 },
+  exit: { opacity: 0, y: -8 },
 }
 
 function AnimatedRoutes() {
   const location = useLocation()
   return (
-    <AnimatePresence mode="wait">
+    // volta ao topo quando a página antiga termina de sair, antes da nova entrar
+    <AnimatePresence mode="wait" onExitComplete={() => window.scrollTo(0, 0)}>
       <motion.div
         key={location.pathname}
         variants={pageVariants}
         initial="initial"
         animate="animate"
         exit="exit"
-        transition={{ duration: 0.25 }}
+        transition={{ duration: 0.45, ease: EASE }}
       >
         <Routes location={location}>
           <Route path="/" element={<Home />} />
@@ -41,14 +43,16 @@ function AnimatedRoutes() {
 export default function App() {
   return (
     <ThemeProvider>
-      <BrowserRouter>
-        <Navbar />
-        <main>
-          <AnimatedRoutes />
-        </main>
-        <Footer />
-        <LikeButton />
-      </BrowserRouter>
+      <MotionConfig transition={DEFAULT_TRANSITION}>
+        <BrowserRouter>
+          <Navbar />
+          <main>
+            <AnimatedRoutes />
+          </main>
+          <Footer />
+          <LikeButton />
+        </BrowserRouter>
+      </MotionConfig>
     </ThemeProvider>
   )
 }

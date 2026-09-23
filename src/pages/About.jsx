@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { useTheme } from '../context/ThemeContext'
+import { EASE } from '../lib/motion'
 import HexBackground from '../components/HexBackground'
 import { Link } from 'react-router-dom'
 
@@ -65,7 +66,7 @@ export default function About() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.8, ease: EASE }}
           >
             <h1 className={`text-5xl font-black mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
               Quer ver o que eu
@@ -80,8 +81,8 @@ export default function About() {
             </h1>
             <p className={`text-base mb-8 max-w-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
               Desenvolvimento focado em{' '}
-              <span className="text-blue-500 font-medium">SEO</span>,
-              performance e <span className="text-cyan-400 font-medium">UX</span>,
+              <span className="text-green-500 font-medium">SEO</span>,
+              performance e <span className="text-emerald-400 font-medium">UX</span>,
               Core Web Vitals.
             </p>
             <div className="flex gap-3">
@@ -97,35 +98,55 @@ export default function About() {
             </div>
           </motion.div>
 
-          {/* Right image card */}
+          {/* Card com foto e dados do perfil */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className={`rounded-2xl overflow-hidden border relative ${isDark ? 'border-white/8 bg-[#111]' : 'border-gray-200 bg-white shadow-sm'}`}
+            transition={{ duration: 0.8, ease: EASE, delay: 0.2 }}
+            className={`rounded-2xl overflow-hidden border relative ${isDark ? 'border-white/10 bg-[#0f0f0f]' : 'border-gray-200 bg-white shadow-sm'}`}
           >
-            <div className={`h-48 flex items-center justify-center ${isDark ? 'bg-gradient-to-br from-blue-950 to-[#111]' : 'bg-gradient-to-br from-blue-50 to-gray-100'}`}>
-              <svg viewBox="0 0 200 120" className="w-full h-full opacity-80">
-                {/* Simplified logistics/tech illustration */}
-                <rect x="10" y="20" width="80" height="80" rx="8" fill="#1e3a5f" opacity="0.8"/>
-                <text x="30" y="55" fontSize="22" fill="#60a5fa">📦</text>
-                <text x="25" y="85" fontSize="10" fill="#93c5fd" fontFamily="monospace">LOGISTICS</text>
-                <path d="M95 60 L115 60" stroke="#3b82f6" strokeWidth="2" markerEnd="url(#arrow)"/>
-                <rect x="118" y="20" width="72" height="80" rx="8" fill="#1e3a5f" opacity="0.8"/>
-                <text x="132" y="55" fontSize="16" fill="#60a5fa">💻</text>
-                <text x="122" y="75" fontSize="8" fill="#93c5fd" fontFamily="monospace">SOFTWARE</text>
-                <text x="122" y="87" fontSize="8" fill="#93c5fd" fontFamily="monospace">ENGINEERING</text>
-              </svg>
+            <div className={`relative h-72 overflow-hidden ${isDark ? 'bg-gradient-to-b from-green-950/40 to-transparent' : 'bg-gradient-to-b from-green-50 to-white'}`}>
+              <div className={`absolute inset-0 ${isDark ? 'hex-pattern' : 'hex-pattern-light'}`} />
+              <div
+                className="absolute left-1/2 top-8 -translate-x-1/2 w-80 h-80 rounded-full pointer-events-none"
+                style={{ background: 'radial-gradient(closest-side, rgba(34,197,94,0.35), transparent)' }}
+              />
+              <motion.img
+                src="/mikael-recorte.png"
+                alt="Mikael Dias"
+                className="absolute left-1/2 top-6 h-[520px] w-auto max-w-none -translate-x-1/2"
+                style={{
+                  maskImage: 'linear-gradient(to bottom, #000 42%, transparent 56%)',
+                  WebkitMaskImage: 'linear-gradient(to bottom, #000 42%, transparent 56%)',
+                }}
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, ease: EASE, delay: 0.35 }}
+              />
+              <span className={`absolute top-4 left-4 inline-flex items-center gap-1.5 text-[11px] px-2.5 py-1 rounded-full border backdrop-blur ${isDark ? 'bg-black/40 border-green-500/30 text-green-400' : 'bg-white/80 border-green-200 text-green-700'}`}>
+                <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                Disponível para oportunidades
+              </span>
+              <span className={`absolute bottom-5 right-4 text-xs font-mono px-2.5 py-1 rounded-lg border backdrop-blur ${isDark ? 'bg-black/50 border-white/10 text-gray-300' : 'bg-white/80 border-gray-200 text-gray-700'}`}>
+                <span className="text-green-400">{'<'}</span>Back-end & Front-end<span className="text-green-400">{' />'}</span>
+              </span>
             </div>
-            <div className="p-4">
-              <div className={`font-semibold mb-1 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                Entregas de alta qualidade
+            <div className={`p-5 border-t ${isDark ? 'border-white/5' : 'border-gray-100'}`}>
+              <div className={`text-lg font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>Mikael Dias</div>
+              <div className={`text-sm mb-4 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                Desenvolvedor · Python, Node.js & React
               </div>
-              <div className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                Focado em performance, SEO e experiência do usuário.
-              </div>
-              <div className={`text-xs mt-2 ${isDark ? 'text-gray-600' : 'text-gray-400'}`}>
-                {new Date().toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })}
+              <div className="grid grid-cols-3 gap-2">
+                {[
+                  { value: 'ADS', label: '3º período' },
+                  { value: 'Uberlândia', label: 'MG · Brasil' },
+                  { value: '11', label: 'repositórios' },
+                ].map(item => (
+                  <div key={item.value} className={`rounded-lg px-3 py-2 ${isDark ? 'bg-white/[0.04]' : 'bg-gray-50'}`}>
+                    <div className={`text-sm font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>{item.value}</div>
+                    <div className={`text-[11px] ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>{item.label}</div>
+                  </div>
+                ))}
               </div>
             </div>
           </motion.div>
@@ -138,7 +159,7 @@ export default function About() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: '-60px' }}
             className="mb-16 max-w-2xl"
           >
             <h2 className={`text-4xl font-black mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
@@ -160,12 +181,12 @@ export default function About() {
                   key={item.id}
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
+                  viewport={{ once: true, margin: '-60px' }}
+                  transition={{ duration: 0.8, ease: EASE, delay: i * 0.1 }}
                   className="flex gap-4"
                 >
                   <div className="flex flex-col items-center">
-                    <div className={`w-2 h-2 rounded-full mt-1.5 flex-shrink-0 ${item.highlight ? 'bg-blue-500' : isDark ? 'bg-gray-600' : 'bg-gray-300'}`} />
+                    <div className={`w-2 h-2 rounded-full mt-1.5 flex-shrink-0 ${item.highlight ? 'bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.7)]' : isDark ? 'bg-gray-600' : 'bg-gray-300'}`} />
                     {i < timeline.length - 1 && (
                       <div className={`w-px flex-1 mt-2 ${isDark ? 'bg-white/10' : 'bg-gray-200'}`} />
                     )}
@@ -189,8 +210,8 @@ export default function About() {
                   key={item.id}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
+                  viewport={{ once: true, margin: '-60px' }}
+                  transition={{ duration: 0.8, ease: EASE, delay: i * 0.1 }}
                 >
                   <h3 className={`text-xl font-bold mb-3 ${isDark ? 'text-white' : 'text-gray-900'}`}>
                     {item.title}
@@ -215,7 +236,7 @@ export default function About() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: '-60px' }}
             className="mb-12"
           >
             <h2 className={`text-3xl font-black mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
@@ -232,8 +253,8 @@ export default function About() {
                 key={skill.name}
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
+                viewport={{ once: true, margin: '-60px' }}
+                transition={{ duration: 0.8, ease: EASE, delay: i * 0.05 }}
               >
                 <div className="flex justify-between mb-2">
                   <span className={`text-sm font-medium ${isDark ? 'text-white' : 'text-gray-900'}`}>
@@ -249,8 +270,8 @@ export default function About() {
                     style={{ backgroundColor: skill.color }}
                     initial={{ width: 0 }}
                     whileInView={{ width: `${skill.level}%` }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, delay: i * 0.05, ease: 'easeOut' }}
+                    viewport={{ once: true, margin: '-60px' }}
+                    transition={{ duration: 1.4, delay: 0.2 + i * 0.06, ease: EASE }}
                   />
                 </div>
               </motion.div>

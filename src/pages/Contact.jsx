@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useTheme } from '../context/ThemeContext'
+import { EASE } from '../lib/motion'
 import HexBackground from '../components/HexBackground'
 
 export default function Contact() {
@@ -24,8 +25,8 @@ export default function Contact() {
 
   const inputClass = `w-full rounded-lg px-4 py-3 text-sm outline-none transition-all duration-200 ${
     isDark
-      ? 'bg-white/5 border border-white/10 text-white placeholder:text-gray-600 focus:border-blue-500/50 focus:bg-white/8'
-      : 'bg-gray-50 border border-gray-300 text-gray-900 placeholder:text-gray-400 focus:border-blue-500 focus:bg-white'
+      ? 'bg-white/5 border border-white/10 text-white placeholder:text-gray-600 focus:border-green-500/50 focus:bg-white/10 focus:shadow-[0_0_0_3px_rgba(34,197,94,0.12)]'
+      : 'bg-gray-50 border border-gray-300 text-gray-900 placeholder:text-gray-400 focus:border-green-500 focus:bg-white focus:shadow-[0_0_0_3px_rgba(34,197,94,0.15)]'
   }`
 
   return (
@@ -37,7 +38,7 @@ export default function Contact() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.8, ease: EASE }}
           >
             <h1 className={`text-4xl sm:text-5xl font-black mb-4 leading-tight ${isDark ? 'text-white' : 'text-gray-900'}`}>
               Obrigado pela
@@ -49,13 +50,13 @@ export default function Contact() {
             </h1>
             <p className={`text-sm mb-8 max-w-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
               Estou disponível para novos{' '}
-              <span className="text-blue-500">projetos</span>,{' '}
-              <span className="text-cyan-400">oportunidades</span> e
+              <span className="text-green-500">projetos</span>,{' '}
+              <span className="text-emerald-400">oportunidades</span> e
               colaborações. Deixe seu contato e responderei em breve.
             </p>
             <div className="flex gap-3">
               <a
-                href="mailto:diegocativeiroleopardo@gmail.com"
+                href="mailto:mikaellobatodias@gmail.com"
                 className="btn-secondary text-sm"
               >
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
@@ -82,13 +83,13 @@ export default function Contact() {
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className={`rounded-2xl border overflow-hidden ${isDark ? 'bg-[#111] border-white/8' : 'bg-white border-gray-200 shadow-sm'}`}
+            transition={{ duration: 0.8, ease: EASE, delay: 0.2 }}
+            className={`rounded-2xl border overflow-hidden ${isDark ? 'bg-[#111] border-white/10' : 'bg-white border-gray-200 shadow-sm'}`}
           >
-            <div className={`h-44 flex items-center justify-center relative overflow-hidden ${isDark ? 'bg-gradient-to-br from-blue-950/50 to-[#0d0d0d]' : 'bg-gradient-to-br from-blue-50 to-gray-100'}`}>
+            <div className={`h-44 flex items-center justify-center relative overflow-hidden ${isDark ? 'bg-gradient-to-br from-green-950/60 to-[#0d0d0d]' : 'bg-gradient-to-br from-green-50 to-gray-100'}`}>
               {/* BUILD neon-style text */}
               <div className="text-center">
-                <div className="text-4xl font-black text-blue-400 drop-shadow-[0_0_20px_rgba(59,130,246,0.8)]">
+                <div className="text-4xl font-black text-green-400 drop-shadow-[0_0_20px_rgba(34,197,94,0.8)]">
                   BUILD
                 </div>
                 <div className={`text-xs mt-2 ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
@@ -97,9 +98,9 @@ export default function Contact() {
               </div>
               {/* Floating badges */}
               <div className={`absolute bottom-4 left-4 text-xs px-2 py-1 rounded ${isDark ? 'bg-[#111] border border-white/10' : 'bg-white border border-gray-200 shadow'}`}>
-                <span className="text-blue-400">{'< '}</span>
+                <span className="text-green-400">{'< '}</span>
                 <span className={isDark ? 'text-white' : 'text-gray-900'}>Dev</span>
-                <span className="text-blue-400">{' />'}</span>
+                <span className="text-green-400">{' />'}</span>
               </div>
             </div>
             <div className="p-5">
@@ -116,7 +117,7 @@ export default function Contact() {
                 href="https://www.linkedin.com/in/mikael-dias"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs text-blue-400 hover:text-blue-300 transition-colors"
+                className="text-xs text-green-400 hover:text-green-300 transition-colors duration-300"
               >
                 Ver meu LinkedIn →
               </a>
@@ -131,7 +132,7 @@ export default function Contact() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: '-60px' }}
             className="mb-10"
           >
             <h2 className={`text-3xl font-black mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
@@ -147,8 +148,8 @@ export default function Contact() {
             onSubmit={handleSubmit}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.8, ease: EASE, delay: 0.1 }}
             className="space-y-4"
           >
             {/* Name row */}
@@ -187,7 +188,7 @@ export default function Contact() {
             <div>
               <label className={`flex items-center gap-2 text-sm font-medium mb-1.5 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
                 Email
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-3.5 h-3.5 text-blue-500">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-3.5 h-3.5 text-green-500">
                   <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                   <polyline points="22,6 12,13 2,6" />
                 </svg>
@@ -240,12 +241,12 @@ export default function Contact() {
             <button
               type="submit"
               disabled={status === 'sending'}
-              className={`w-full py-3.5 rounded-lg font-semibold text-sm transition-all duration-200 ${
+              className={`w-full py-3.5 rounded-lg font-semibold text-sm transition-all duration-300 ease-out ${
                 status === 'sent'
                   ? 'bg-green-600 text-white'
                   : isDark
-                  ? 'bg-white text-black hover:bg-gray-200 disabled:opacity-50'
-                  : 'bg-gray-900 text-white hover:bg-gray-700 disabled:opacity-50'
+                  ? 'bg-white text-black hover:bg-green-400 hover:shadow-[0_8px_24px_rgba(34,197,94,0.25)] disabled:opacity-50'
+                  : 'bg-gray-900 text-white hover:bg-green-600 disabled:opacity-50'
               }`}
             >
               {status === 'sending' ? 'Enviando...' : status === 'sent' ? 'Mensagem enviada!' : 'Enviar'}

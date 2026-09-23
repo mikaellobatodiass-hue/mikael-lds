@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useTheme } from '../context/ThemeContext'
+import { EASE } from '../lib/motion'
 import HexBackground from '../components/HexBackground'
 import Avatar3D from '../components/Avatar3D'
+import HexLightning from '../components/HexLightning'
+import FloatingDock from '../components/FloatingDock'
 import ContribGraph from '../components/ContribGraph'
 import TechScroll from '../components/TechScroll'
 
@@ -15,6 +18,39 @@ const stack = [
   { name: 'PostgreSQL', icon: `${BASE}/postgresql/postgresql-original.svg` },
 ]
 
+// Cards da direita com borda verde brilhante (tema escuro)
+const cardDark = 'bg-[#0b0f0c]/90 backdrop-blur border-green-500/50 shadow-[0_0_18px_rgba(34,197,94,0.25),inset_0_0_12px_rgba(34,197,94,0.06)]'
+
+// Ícones de contorno para o dock de redes sociais
+const DockSvg = ({ children }) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full">
+    {children}
+  </svg>
+)
+
+const socials = [
+  {
+    title: 'GitHub',
+    href: 'https://github.com/mikaellobatodiass-hue',
+    icon: <DockSvg><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21" /></DockSvg>,
+  },
+  {
+    title: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/mikael-dias',
+    icon: <DockSvg><rect x="4" y="4" width="16" height="16" rx="2" /><path d="M8 11v5M8 8v.01M12 16v-5M16 16v-3a2 2 0 0 0-4 0" /></DockSvg>,
+  },
+  {
+    title: 'Instagram',
+    href: 'https://instagram.com/mikael_lds',
+    icon: <DockSvg><rect x="4" y="4" width="16" height="16" rx="4" /><circle cx="12" cy="12" r="3" /><path d="M16.5 7.5v.01" /></DockSvg>,
+  },
+  {
+    title: 'WhatsApp',
+    href: 'https://wa.me/5589981089633',
+    icon: <DockSvg><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" /><path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1" /></DockSvg>,
+  },
+]
+
 export default function Home() {
   const { isDark } = useTheme()
 
@@ -23,20 +59,21 @@ export default function Home() {
       {/* ── Hero ── */}
       <section className="relative min-h-screen flex items-center pt-16 overflow-hidden">
         <HexBackground />
+        <HexLightning />
 
         {/* Subtle radial glow */}
-        <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-blue-600/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute top-1/4 right-1/4 w-72 h-72 bg-cyan-600/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-green-600/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-1/4 right-1/4 w-72 h-72 bg-emerald-600/5 rounded-full blur-3xl pointer-events-none" />
 
         {/* ── 3-column grid: text | avatar card | sidebar cards ── */}
-        <div className="max-w-7xl mx-auto px-6 w-full py-20">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_260px_148px] gap-6 items-start">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 w-full py-20">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px_160px] gap-6 items-center">
 
             {/* Col 1 — text */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7 }}
+              transition={{ duration: 0.8, ease: EASE }}
               className="flex flex-col justify-center min-h-[420px]"
             >
               {/* Available badges */}
@@ -51,7 +88,7 @@ export default function Home() {
                   </span>
                 </div>
 
-                <div className="flex items-center gap-1.5 bg-[#0f172a] border border-blue-500/30 rounded-full px-3 py-1 text-xs text-blue-400 font-mono whitespace-nowrap">
+                <div className="flex items-center gap-1.5 bg-green-500/10 border border-green-500/30 rounded-full px-3 py-1 text-xs text-green-400 font-mono whitespace-nowrap">
                   <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
                   Disponível para projetos
                 </div>
@@ -91,13 +128,18 @@ export default function Home() {
                   Entre em Contato
                 </Link>
               </div>
+
+              {/* Redes sociais (dock que cresce com o mouse) */}
+              <div className="mt-16">
+                <FloatingDock items={socials} />
+              </div>
             </motion.div>
 
             {/* Col 2 — Avatar card */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1 }}
+              transition={{ duration: 0.8, ease: EASE, delay: 0.1 }}
               className="relative"
               style={{ padding: 0, margin: 0, background: 'none', border: 'none' }}
             >
@@ -108,11 +150,11 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
+              transition={{ duration: 0.8, ease: EASE, delay: 0.2 }}
               className="flex flex-col gap-3"
             >
               {/* Stack card */}
-              <div className={`rounded-xl p-3 border ${isDark ? 'bg-[#111] border-white/8' : 'bg-white border-gray-200 shadow-sm'}`}>
+              <div className={`rounded-xl p-3 border ${isDark ? cardDark : 'bg-white border-gray-200 shadow-sm'}`}>
                 <div className="text-[10px] text-gray-500 uppercase tracking-wider mb-2.5">Stack</div>
                 <div className="grid grid-cols-2 gap-2">
                   {stack.map(tech => (
@@ -134,12 +176,12 @@ export default function Home() {
               </div>
 
               {/* GitHub contrib */}
-              <div className={`rounded-xl p-3 border ${isDark ? 'bg-[#111] border-white/8' : 'bg-white border-gray-200 shadow-sm'}`}>
+              <div className={`rounded-xl p-3 border ${isDark ? cardDark : 'bg-white border-gray-200 shadow-sm'}`}>
                 <ContribGraph totalCommits={312} weekCount={13} cellSize={7} gap={2} />
               </div>
 
               {/* Background card */}
-              <div className={`rounded-xl p-3 border ${isDark ? 'bg-[#111] border-white/8' : 'bg-white border-gray-200 shadow-sm'}`}>
+              <div className={`rounded-xl p-3 border ${isDark ? cardDark : 'bg-white border-gray-200 shadow-sm'}`}>
                 <div className="text-[10px] text-gray-500 uppercase tracking-wider mb-2.5">Background</div>
                 <div className="flex flex-col gap-2.5">
                   {[
@@ -177,8 +219,8 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.8, ease: EASE }}
             >
               <h2 className={`text-4xl sm:text-5xl font-black mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
                 Vamos Construir
@@ -193,9 +235,9 @@ export default function Home() {
               </p>
               <p className={`text-base mb-8 max-w-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
                 Desenvolvimento focado em{' '}
-                <span className="text-blue-500 font-medium">produto</span>,
+                <span className="text-green-500 font-medium">produto</span>,
                 performance e experiência do{' '}
-                <span className="text-cyan-400 font-medium">usuário</span>.
+                <span className="text-emerald-400 font-medium">usuário</span>.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link to="/sobre" className="btn-primary">
@@ -215,9 +257,9 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className={`rounded-2xl overflow-hidden border relative ${isDark ? 'border-white/8 bg-[#111]' : 'border-gray-200 bg-gray-50 shadow-sm'}`}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.8, ease: EASE, delay: 0.2 }}
+              className={`rounded-2xl overflow-hidden border relative ${isDark ? 'border-white/10 bg-[#111]' : 'border-gray-200 bg-gray-50 shadow-sm'}`}
             >
               {/* Mock screen */}
               <div className={`aspect-video relative overflow-hidden ${isDark ? 'bg-[#0d1117]' : 'bg-gray-900'}`}>

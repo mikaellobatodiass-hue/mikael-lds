@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from '../context/ThemeContext'
+import { EASE } from '../lib/motion'
 
 const links = [
   { to: '/', label: 'Principal' },
@@ -27,22 +28,22 @@ export default function Navbar() {
   }, [location.pathname])
 
   const bg = isDark
-    ? scrolled ? 'bg-[#0a0a0a]/95 border-white/5' : 'bg-transparent border-transparent'
-    : scrolled ? 'bg-white/95 border-gray-200' : 'bg-transparent border-transparent'
+    ? scrolled ? 'bg-[#0a0a0a]/75 border-white/5 backdrop-blur-xl' : 'bg-transparent border-transparent'
+    : scrolled ? 'bg-white/75 border-gray-200 backdrop-blur-xl' : 'bg-transparent border-transparent'
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b backdrop-blur-sm ${bg}`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out border-b ${bg}`}>
       <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2">
-          <div className={`w-8 h-8 rounded-lg flex items-center justify-center border ${isDark ? 'border-white/20 bg-white/5' : 'border-gray-300 bg-gray-100'}`}>
+        <Link to="/" className="group flex items-center gap-2">
+          <div className={`w-8 h-8 rounded-lg flex items-center justify-center border transition-colors duration-300 ${isDark ? 'border-white/20 bg-white/5 group-hover:border-green-500/50 group-hover:text-green-400' : 'border-gray-300 bg-gray-100 group-hover:border-green-500 group-hover:text-green-600'}`}>
             <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth="2">
               <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5" />
             </svg>
           </div>
           <span className="font-bold text-lg">
             <span className={isDark ? 'text-white' : 'text-gray-900'}>Mikael</span>
-            <span className="text-blue-500">files</span>
+            <span className="text-green-500">files</span>
           </span>
         </Link>
 
@@ -54,13 +55,21 @@ export default function Navbar() {
               <Link
                 key={link.to}
                 to={link.to}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-300 ${
                   active
-                    ? isDark ? 'bg-white/10 text-white' : 'bg-gray-900 text-white'
-                    : isDark ? 'text-gray-400 hover:text-white hover:bg-white/5' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                    ? 'text-white'
+                    : isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'
                 }`}
               >
-                {link.label}
+                {/* destaque que desliza até o link ativo */}
+                {active && (
+                  <motion.span
+                    layoutId="nav-active"
+                    className={`absolute inset-0 rounded-lg ${isDark ? 'bg-white/10 border border-white/10' : 'bg-gray-900'}`}
+                    transition={{ duration: 0.5, ease: EASE }}
+                  />
+                )}
+                <span className="relative">{link.label}</span>
               </Link>
             )
           })}
@@ -129,7 +138,8 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className={`md:hidden border-t ${isDark ? 'bg-[#0a0a0a] border-white/5' : 'bg-white border-gray-200'}`}
+            transition={{ duration: 0.4, ease: EASE }}
+            className={`md:hidden overflow-hidden border-t ${isDark ? 'bg-[#0a0a0a] border-white/5' : 'bg-white border-gray-200'}`}
           >
             <div className="px-6 py-4 flex flex-col gap-1">
               {links.map(link => (

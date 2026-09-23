@@ -10,7 +10,7 @@ function Particle({ x, y, onDone }) {
   const tx = Math.cos(angle) * distance
   const ty = Math.sin(angle) * distance
   const size = 4 + Math.random() * 6
-  const colors = ['#3b82f6', '#60a5fa', '#93c5fd', '#1d4ed8', '#06b6d4']
+  const colors = ['#22c55e', '#4ade80', '#86efac', '#16a34a', '#10b981']
   const color = colors[Math.floor(Math.random() * colors.length)]
 
   return (
@@ -101,7 +101,7 @@ export default function LikeButton() {
             w-13 h-13 rounded-full flex items-center justify-center
             shadow-lg border transition-all duration-300 select-none
             ${liked
-              ? 'bg-[#3b82f6] border-[#1d4ed8]/60 cursor-default shadow-[#3b82f6]/20'
+              ? 'bg-[#16a34a] border-[#15803d]/60 cursor-default shadow-[#22c55e]/20'
               : 'bg-[#1a1a1a] border-white/10 hover:border-white/25 hover:bg-[#222] cursor-pointer shadow-black/40'
             }
           `}
@@ -111,7 +111,7 @@ export default function LikeButton() {
             animate={burst ? { scale: [1, 1.5, 1] } : { scale: 1 }}
             transition={{ duration: 0.3 }}
             className="text-2xl leading-none"
-            style={{ filter: liked ? 'drop-shadow(0 0 6px #3b82f6)' : 'none' }}
+            style={{ filter: liked ? 'drop-shadow(0 0 6px #22c55e)' : 'none' }}
           >
             {liked ? '❤️' : '🤍'}
           </motion.span>
