@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 
-// Pasta de projetos: ao passar o mouse a frente da pasta abre e os projetos
-// saem em leque por cima; cada projeto dá zoom no hover e abre o repositório no clique.
+// Pasta de projetos: com o mouse no card, só um hover leve; com o mouse em cima do
+// desenho da pasta, a frente abre e os projetos saem em leque por cima. Cada projeto
+// dá zoom no hover e abre o repositório no clique.
 // curva suave: sai rápido e chega devagar, sem quicar
 const EASE = { duration: 0.55, ease: [0.22, 1, 0.36, 1] }
 const MAX_CARDS = 5
@@ -38,7 +39,8 @@ function Cover({ project, colors, langColor }) {
 }
 
 export default function ProjectFolder({ name, colors, projects, isDark, langColor, onSelect }) {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false)   // mouse em cima da pasta: abre o leque
+  const [hover, setHover] = useState(false) // mouse em qualquer parte do card
   const shown = projects.slice(0, MAX_CARDS)
   const mid = (shown.length - 1) / 2
 
@@ -47,29 +49,35 @@ export default function ProjectFolder({ name, colors, projects, isDark, langColo
       role="button"
       tabIndex={0}
       aria-label={`Ver projetos de ${name}`}
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => { setHover(false); setOpen(false) }}
       onFocus={() => setOpen(true)}
       onBlur={() => setOpen(false)}
       onClick={onSelect}
       onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && onSelect()}
-      animate={{ y: open ? -4 : 0, rotate: open ? -0.8 : 0 }}
+      animate={{ y: open ? -5 : hover ? -3 : 0, rotate: open ? -0.8 : 0 }}
       transition={EASE}
-      className={`relative h-[330px] rounded-2xl border cursor-pointer select-none outline-none ${
+      className={`relative h-[330px] rounded-2xl border cursor-pointer select-none outline-none transition-[border-color,box-shadow] duration-500 ${
         isDark ? 'bg-[#141414] border-white/10' : 'bg-white border-gray-200 shadow-sm'
       }`}
+      style={hover ? { borderColor: `${colors.to}66`, boxShadow: `0 12px 40px -12px ${colors.glow}` } : undefined}
     >
       {/* brilho da cor da pasta subindo pelo card */}
       <motion.div
         className="absolute inset-0 rounded-2xl pointer-events-none"
         style={{ background: `linear-gradient(to top, ${colors.glow}, transparent 75%)` }}
         initial={false}
-        animate={{ opacity: open ? 1 : 0 }}
+        animate={{ opacity: open ? 1 : hover ? 0.4 : 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
       />
 
       {/* pasta */}
-      <div className="absolute left-1/2 top-[74px] -translate-x-1/2 w-[168px] h-[124px]" style={{ perspective: 700 }}>
+      <div
+        className="absolute left-1/2 top-[74px] -translate-x-1/2 w-[168px] h-[124px]"
+        style={{ perspective: 700 }}
+        onMouseEnter={() => setOpen(true)}
+        onMouseLeave={() => setOpen(false)}
+      >
         {/* aba e fundo */}
         <div className="absolute left-4 top-0 w-16 h-7 rounded-t-lg" style={{ background: colors.tab }} />
         <div className="absolute inset-x-0 top-4 bottom-0 rounded-xl" style={{ background: colors.tab }} />
@@ -127,7 +135,7 @@ export default function ProjectFolder({ name, colors, projects, isDark, langColo
           animate={{ opacity: open ? 0 : 1 }}
           transition={{ duration: 0.4 }}
         >
-          Passe o mouse
+          Passe o mouse na pasta
         </motion.div>
       </div>
     </motion.div>
